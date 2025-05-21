@@ -9,7 +9,7 @@ volumes:
 x-op-restart-policy: &restart_policy
   restart: unless-stopped
 x-op-image: &image
-  image: openproject/openproject:${TAG:-15-slim}
+  image: openproject/openproject:${TAG:-16-slim}
 x-op-app: &app
   <<: [*image, *restart_policy]
   environment:
