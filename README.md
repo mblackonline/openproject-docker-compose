@@ -9,10 +9,10 @@ This repository contains the installation method for OpenProject using Docker Co
 
 ## Quick start
 
-First, you must clone the [openproject-deploy](https://github.com/opf/openproject-deploy/tree/stable/15/compose) repository:
+First, you must clone the [openproject-docker-compose](https://github.com/opf/openproject-docker-compose) repository:
 
 ```shell
-git clone https://github.com/opf/openproject-deploy --depth=1 --branch=stable/15 openproject
+git clone https://github.com/opf/openproject-docker-compose.git --depth=1 --branch=stable/16 openproject
 ```
 
 Copy the example `.env` file and edit any values you want to change:
@@ -35,14 +35,14 @@ Next you start up the containers in the background while making sure to pull the
 OPENPROJECT_HTTPS=false docker compose up -d --build --pull always
 ```
 
-After a while, OpenProject should be up and running on `http://localhost:8080`. The default username and password is login: `admin`, and password: `admin`. 
+After a while, OpenProject should be up and running on `http://localhost:8080`. The default username and password is login: `admin`, and password: `admin`.
 The `OPENPROJECT_HTTPS=false` environment variable explicitly disables HTTPS mode for the first startup. Without this, OpenProject assumes it's running behind HTTPS in production by default.
 We do strongly recommend you use OpenProject behind a TLS terminated proxy for production purposes and remove this flag before actually starting to use it.
 
 ### Customization
 
-The `docker-compose.yml` file present in the repository can be adjusted to your convenience. But note that with each pull, it will be overwritten. 
-Best practice is to use the file `docker-compose.override.yml` for that case. 
+The `docker-compose.yml` file present in the repository can be adjusted to your convenience. But note that with each pull, it will be overwritten.
+Best practice is to use the file `docker-compose.override.yml` for that case.
 For instance you could mount specific configuration files, override environment variables, or switch off services you don't need.
 
 Please refer to the official [Docker Compose documentation](https://docs.docker.com/compose/extends/) for more details.
@@ -133,9 +133,9 @@ In order to install or change to BIM inside a Docker environment, please navigat
 
 ## Upgrade
 
-Retrieve any changes from the `openproject-deploy` repository:
+Retrieve any changes from the `openproject-docker-compose` repository:
 
-    git pull origin stable/15
+    git pull origin stable/16
 
 Build the control plane:
 
