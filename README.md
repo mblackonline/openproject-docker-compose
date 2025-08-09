@@ -5,6 +5,9 @@
 
 A clean Docker Compose template for running OpenProject locally for development and testing.
 
+**Disclaimer**  
+This project was developed with AI assistance. The code and documentation are provided "as-is" without any warranties. Users should review and test all functionality before use in production environments.
+
 ## About OpenProject
 
 [OpenProject](https://www.openproject.org/) is the leading open source project management software, licensed under GPL v3. This template is based on the official OpenProject Docker Compose setup.
