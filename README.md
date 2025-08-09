@@ -37,6 +37,8 @@ A clean Docker Compose template for running OpenProject locally for development 
    mkdir -p ./pgdata ./opdata
    sudo chown 1000:1000 ./opdata
    ```
+   
+   **Note:** This template uses project-specific data directories for safety. Data will be stored in your project folder, not system-wide locations.
 
 4. **Start OpenProject:**
    ```bash
