@@ -15,6 +15,10 @@ A clean Docker Compose template for running OpenProject locally for development 
 - Docker and Docker Compose installed
 - Git
 
+**Tested Environment:**
+- WSL2 Ubuntu 22.04 with Docker Desktop
+- This template has been specifically tested and verified on this setup
+
 ### Setup Instructions
 
 1. **Clone this repository:**
