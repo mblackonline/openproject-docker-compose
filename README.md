@@ -45,17 +45,11 @@ A clean Docker Compose template for running OpenProject locally for development 
    docker compose up -d --build --pull always
    ```
 
-5. **Start OpenProject and wait for full startup:**
-   ```bash
-   # Wait 30-60 seconds for all services to fully start
-   # You will get 502 errors if you try to access too early
-   ```
-   
-6. **Access OpenProject:**
+5. **Wait for startup, then access OpenProject:**
+   - Wait 30-60 seconds for all services to start
    - URL: http://127.0.0.1:8080
    - Username: `admin`
    - Password: `admin`
-   - **Note:** Wait at least 30-60 seconds after startup before accessing. You'll get 502 Bad Gateway errors if services aren't fully ready.
 
 ### Management Commands
 
