@@ -43,10 +43,17 @@ A clean Docker Compose template for running OpenProject locally for development 
    docker compose up -d --build --pull always
    ```
 
-5. **Wait for startup (30-60 seconds) then access:**
+5. **Start OpenProject and wait for full startup:**
+   ```bash
+   # Wait 30-60 seconds for all services to fully start
+   # You will get 502 errors if you try to access too early
+   ```
+   
+6. **Access OpenProject:**
    - URL: http://127.0.0.1:8080
    - Username: `admin`
    - Password: `admin`
+   - **Note:** Wait at least 30-60 seconds after startup before accessing. You'll get 502 Bad Gateway errors if services aren't fully ready.
 
 ### Management Commands
 
@@ -72,9 +79,18 @@ docker compose down
 
 **Fresh installation (removes ALL data):**
 ```bash
-docker compose down
+docker compose down --volumes
 sudo rm -rf /var/openproject/assets /var/lib/postgresql/data
 ```
+
+**Alternative method - Remove specific volumes:**
+```bash
+docker compose down
+docker volume rm openproject-docker-compose_pgdata openproject-docker-compose_opdata
+sudo rm -rf /var/openproject/assets /var/lib/postgresql/data
+```
+
+**Note:** After a fresh installation, you'll get the default `admin/admin` credentials again.
 
 ## Configuration
 
@@ -103,16 +119,46 @@ Data survives container restarts and system reboots.
 ## Troubleshooting
 
 ### 502 Bad Gateway
-- Wait 30-60 seconds for full startup
+- **Most Common:** Wait 30-60 seconds for full startup - OpenProject takes time to initialize all services
 - Check logs: `docker compose logs web`
+- Verify all containers are running: `docker compose ps`
+
+### Port Already in Use ("Bind for 127.0.0.1:8080 failed: port is already allocated")
+This happens when Docker's port allocation gets stuck from previous runs:
+
+```bash
+# Step 1: Stop all containers and clean up
+docker compose down
+docker stop $(docker ps -aq) 2>/dev/null || true
+docker rm $(docker ps -aq) 2>/dev/null || true
+
+# Step 2: Clean up Docker networks
+docker network prune -f
+
+# Step 3: Restart Docker service
+sudo service docker stop
+sudo service docker start
+
+# Step 4: Verify port is free
+sudo lsof -i :8080
+
+# Step 5: Try starting again
+docker compose up -d --build --pull always
+```
+
+**Alternative:** If using Docker Desktop, restart it completely from the system tray.
 
 ### Permission Issues
 ```bash
 sudo chown 1000:1000 -R /var/openproject/assets
 ```
 
-### Port Already in Use
-Change the port in `.env` file and restart.
+### Change Port
+Edit `.env` file and modify both:
+```
+OPENPROJECT_HOST__NAME=127.0.0.1:YOUR_PORT
+PORT=127.0.0.1:YOUR_PORT
+```
 
 ## Security Notes
 
