@@ -23,13 +23,13 @@ A clean Docker Compose template for running OpenProject locally for development 
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/mblackonline/openproject.git
-   cd openproject
+   git clone https://github.com/mblackonline/openproject-docker-compose.git
+   cd openproject-docker-compose
    ```
 
 2. **Create your environment file:**
    ```bash
-   cp .env.template .env
+   cp .env.example .env
    ```
 
 3. **Create required directories with proper permissions:**
@@ -138,4 +138,4 @@ This template is based on the official [OpenProject Docker Compose](https://gith
 ---
 
 **Template created by**: Matt Black  
-**Repository**: https://github.com/mblackonline/openproject
+**Repository**: https://github.com/mblackonline/openproject-docker-compose
