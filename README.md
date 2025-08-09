@@ -31,22 +31,11 @@ A clean Docker Compose template for running OpenProject locally for development 
    ```bash
    cp .env.example .env
    ```
-   
-   **⚠️ IMPORTANT:** Edit `.env` to use safe, project-specific data directories:
-   ```bash
-   # Change these lines in your .env file:
-   PGDATA="./pgdata"
-   OPDATA="./opdata"
-   ```
-   
-   **Why:** The default paths use system-wide directories that could conflict with other PostgreSQL installations and potentially delete data from other projects.
 
-3. **Create required directories with proper permissions:**
+3. **Create required directories:**
    ```bash
-   # Only needed if you kept the default OPDATA path
-   # If you changed to ./opdata, skip this step
-   sudo mkdir -p /var/openproject/assets
-   sudo chown 1000:1000 -R /var/openproject/assets
+   mkdir -p ./pgdata ./opdata
+   sudo chown 1000:1000 ./opdata
    ```
 
 4. **Start OpenProject:**
