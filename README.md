@@ -108,14 +108,6 @@ OPENPROJECT_HOST__NAME=127.0.0.1:YOUR_PORT
 PORT=127.0.0.1:YOUR_PORT
 ```
 
-## Data Persistence
-
-Data is automatically persisted in:
-- **Database:** `/var/lib/postgresql/data`
-- **Files/Assets:** `/var/openproject/assets`
-
-Data survives container restarts and system reboots.
-
 ## Troubleshooting
 
 ### 502 Bad Gateway
