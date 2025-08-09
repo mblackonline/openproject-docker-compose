@@ -80,14 +80,14 @@ docker compose down
 **Fresh installation (removes ALL data):**
 ```bash
 docker compose down --volumes
-sudo rm -rf /var/openproject/assets /var/lib/postgresql/data
+sudo rm -rf /var/openproject/assets
 ```
 
 **Alternative method - Remove specific volumes:**
 ```bash
 docker compose down
 docker volume rm openproject-docker-compose_pgdata openproject-docker-compose_opdata
-sudo rm -rf /var/openproject/assets /var/lib/postgresql/data
+sudo rm -rf /var/openproject/assets
 ```
 
 **Note:** After a fresh installation, you'll get the default `admin/admin` credentials again.
