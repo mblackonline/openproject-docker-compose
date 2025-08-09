@@ -84,7 +84,10 @@ docker compose down
 **If using project-specific directories (recommended):**
 ```bash
 docker compose down
-rm -rf ./pgdata ./opdata
+sudo rm -rf ./pgdata ./opdata
+
+# If you still get port conflicts:
+sudo service docker restart
 ```
 
 **If using default system directories (⚠️ DANGEROUS):**
@@ -116,45 +119,18 @@ Data survives container restarts and system reboots.
 ## Troubleshooting
 
 ### 502 Bad Gateway
-- **Most Common:** Wait 30-60 seconds for full startup - OpenProject takes time to initialize all services
-- Check logs: `docker compose logs web`
-- Verify all containers are running: `docker compose ps`
+Wait 30-60 seconds for startup. Check logs: `docker compose logs web`
 
-### Port Already in Use ("Bind for 127.0.0.1:8080 failed: port is already allocated")
-This happens when Docker's port allocation gets stuck from previous runs:
-
+### Port Already in Use
 ```bash
-# Step 1: Stop all containers and clean up
 docker compose down
-docker stop $(docker ps -aq) 2>/dev/null || true
-docker rm $(docker ps -aq) 2>/dev/null || true
-
-# Step 2: Clean up Docker networks
-docker network prune -f
-
-# Step 3: Restart Docker service
-sudo service docker stop
-sudo service docker start
-
-# Step 4: Verify port is free
-sudo lsof -i :8080
-
-# Step 5: Try starting again
-docker compose up -d --build --pull always
+sudo service docker restart
+docker compose up -d
 ```
-
-**Alternative:** If using Docker Desktop, restart it completely from the system tray.
 
 ### Permission Issues
 ```bash
-sudo chown 1000:1000 -R /var/openproject/assets
-```
-
-### Change Port
-Edit `.env` file and modify both:
-```
-OPENPROJECT_HOST__NAME=127.0.0.1:YOUR_PORT
-PORT=127.0.0.1:YOUR_PORT
+sudo chown 1000:1000 ./opdata
 ```
 
 ## Security Notes
