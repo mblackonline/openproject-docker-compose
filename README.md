@@ -99,18 +99,11 @@ sudo rm -rf /var/lib/postgresql/data /var/openproject/assets
 ## Configuration
 
 ### Changing Port
-Edit `.env` file and modify:
+Edit `.env` file and modify both:
 ```
 OPENPROJECT_HOST__NAME=127.0.0.1:YOUR_PORT
 PORT=127.0.0.1:YOUR_PORT
 ```
-
-### Production Use
-For production deployment:
-1. Change database password in `.env`
-2. Set `OPENPROJECT_HTTPS=true`
-3. Configure proper hostname
-4. Set up proper SSL termination
 
 ## Data Persistence
 
@@ -166,9 +159,8 @@ PORT=127.0.0.1:YOUR_PORT
 
 ## Security Notes
 
-- Default credentials are `admin/admin` - **change immediately after first login**
-- Database password should be changed for production use
-- This setup is intended for development/testing, not production
+- Default credentials are `admin/admin` - **change after first login for any shared environments**
+- This setup is intended for local development and testing only
 
 ## Attribution
 
